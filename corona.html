@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Corona Details</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container p-3">
+        <h4 class="text-center">Live Corona Details</h4>
+        <div class="row mt-3 pt-3">
+
+
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body bg-warning text-center">
+                        <h5 class="text-white">Confirmed </h5>
+                        <h5 id="con" class="text-white"></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body bg-danger text-center">
+                        <h5 class="text-white">Death </h5>
+                        <h5 id="det" class="text-white"></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body bg-success text-center">
+                        <h5 class="text-white">Recovered </h5>
+                        <h5 id="rec" class="text-white"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="container mt-3 pt-3">
+        <h5 class="text-center">Country wise DATA</h5>
+        <div class="form d-flex justify-content-center mt-3">
+            <div class="input-group col-5 mb-3">
+                <input type="text" id="name" class="form-control" placeholder="Search Country" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2" style="cursor:pointer" onclick="CountryData()">Search</span>
+                </div>
+              </div>
+    
+        </div>
+
+    <script>
+        const url = "https://api.covid19api.com/summary";
+
+        async function getData() {
+            const res = await fetch(url);
+            const data = await res.json();
+            console.log(data);
+            console.log(data.Global);
+            const Confirmed = (data.Global.TotalConfirmed);
+            const Death = (data.Global.TotalDeaths);
+            const Recover = (data.Global.TotalRecovered);
+
+            document.getElementById('con').innerHTML = Confirmed;
+            document.getElementById('det').innerHTML = Death;
+            document.getElementById('rec').innerHTML = Recover;
+        }
+
+        getData();
+    </script>
+</body>
+
+</html>
